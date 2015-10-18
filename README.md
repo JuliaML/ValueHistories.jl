@@ -21,6 +21,8 @@ Pkg.checkout("ValueHistories")
 
 ## Benchmarks
 
+Compilation already taken into account
+
 ```
 Baseline: 100000 loops that accumulates a Float64
   0.018450 seconds (498.98 k allocations: 9.140 MB, 15.75% gc time)
