@@ -1,6 +1,6 @@
 # ValueHistories
 
-Utility package for efficient tracking of optimization histories, training curves or other information of arbitray types with arbitrary sampling times
+Utility package for efficient tracking of optimization histories, training curves or other information of arbitray types and at arbitrarily spaced sampling times
 
 ## Installation
 
