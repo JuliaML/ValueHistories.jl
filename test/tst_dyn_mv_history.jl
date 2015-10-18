@@ -11,9 +11,7 @@ function f(i, b; muh=10)
   i
 end
 
-@test_throws ArgumentError push!(_history, :myf, -1, f(10, "yo", muh = .3))
-
-numbers = collect(1:2:100)
+numbers = collect(-10:2:100)
 for i = numbers
   @test push!(_history, :myf, i, f(i + 1, "yo", muh = .3)) == i + 1
   if i % 11 == 0
@@ -23,10 +21,10 @@ end
 
 @test_throws ArgumentError push!(_history, :myf, 200, "test")
 
-@test first(_history, :myf) == (1, 2)
-@test last(_history, :myf) == (99, 100)
-@test first(_history, :myint) == (11, 10)
-@test last(_history, :myint) == (99, 98)
+@test first(_history, :myf) == (-10, -9)
+@test last(_history, :myf) == (100, 101)
+@test first(_history, :myint) == (0, -1)
+@test last(_history, :myint) == (88, 87)
 
 for (i, v) in enumerate(_history, :myf)
   @test in(i, numbers)

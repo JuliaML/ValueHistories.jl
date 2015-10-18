@@ -3,7 +3,7 @@ type QueueUnivalueHistory{I,V} <: UnivalueHistory{I}
   storage::Queue{Deque{Tuple{I,V}}}
 
   function QueueUnivalueHistory(::Type{V}, ::Type{I})
-    new(zero(I), Queue(Tuple{I,V}))
+    new(typemin(I), Queue(Tuple{I,V}))
   end
 end
 

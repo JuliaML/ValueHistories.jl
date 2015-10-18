@@ -4,7 +4,7 @@ type VectorUnivalueHistory{I,V} <: UnivalueHistory{I}
   values::Vector{V}
 
   function VectorUnivalueHistory(::Type{V}, ::Type{I})
-    new(zero(I), Array(I, 0), Array(V, 0))
+    new(typemin(I), Array(I, 0), Array(V, 0))
   end
 end
 
