@@ -1,5 +1,33 @@
 using ValueHistories
 using Base.Test
 
-# write your own tests here
-@test 1 == 1
+function msg(args...; newline = true)
+  print("   --> ", args...)
+  newline && println()
+end
+
+# ==========================================================================
+# Specify tests
+
+tests = [
+  "tst_stat_uv_history.jl"
+  "tst_dyn_mv_history.jl"
+]
+
+perf = [
+  #"bm_datasource.jl"
+]
+
+for t in tests
+  println("[->] $t")
+  include(t)
+  println("[OK] $t")
+  println("====================================================================")
+end
+
+for p in perf
+  println("[->] $p")
+  include(p)
+  println("[OK] $p")
+  println("====================================================================")
+end
