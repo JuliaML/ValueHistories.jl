@@ -16,18 +16,16 @@ last(history::DynMultivalueHistory, key::Symbol) = last(history.storage[key])
 
 function push!{I<:Integer,H<:UnivalueHistory,V}(
     history::DynMultivalueHistory{I,H},
-    iteration::I,
     key::Symbol,
+    iteration::I,
     value::V)
-  lastiter = zero(I)
   if !haskey(history.storage, key)
-    iteration >= lastiter || throw(ArgumentError("Iterations must be greater than or equal to 0"))
-    history.storage[key] = H(V, I)
+    _hist = H(V, I)
+    push!(_hist, iteration, value)
+    history.storage[key] = _hist
   else
-    lastiter, _ = last(history.storage[key])
-    iteration > lastiter || throw(ArgumentError("Iterations must increase over time"))
+    push!(history.storage[key], iteration, value)
   end
-  push!(history.storage[key], iteration, value)
   value
 end
 

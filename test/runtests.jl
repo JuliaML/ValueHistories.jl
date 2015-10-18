@@ -15,7 +15,7 @@ tests = [
 ]
 
 perf = [
-  #"bm_datasource.jl"
+  "bm_history.jl"
 ]
 
 for t in tests

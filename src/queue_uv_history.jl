@@ -1,4 +1,4 @@
-immutable QueueUnivalueHistory{I<:Real,V} <: UnivalueHistory{I}
+type QueueUnivalueHistory{I<:Real,V} <: UnivalueHistory{I}
   lastiter::I
   storage::Queue{Deque{Tuple{I,V}}}
 
@@ -23,11 +23,9 @@ function push!{I<:Real,V}(
     history::QueueUnivalueHistory{I,V},
     iteration::I,
     value::V)
-  lastiter = zero(I)
-  if !isempty(history.storage)
-    lastiter = history.lastiter
-    iteration > lastiter || throw(ArgumentError("Iterations must increase over time"))
-  end
+  lastiter = history.lastiter
+  iteration > lastiter || throw(ArgumentError("Iterations must increase over time"))
+  history.lastiter = iteration
   enqueue!(history.storage, (iteration, value))
   value
 end
