@@ -20,6 +20,66 @@ For the latest developer version:
 Pkg.checkout("ValueHistories")
 ```
 
+## Overview
+
+### Tracking a single value
+
+```Julia
+# Specify the type of value you wish to track
+history = QueueUnivalueHistory(Float64)
+
+for i = 1:100
+  # Store any kind of value
+  #   push!(history, iter, value)
+  push!(history, i, i / 2)
+end
+
+# Access stored values as arrays
+x, y = get(history)
+@assert typeof(x) <: Vector{Int}
+@assert typeof(y) <: Vector{Float64}
+
+# You can also enumerate over the observations
+for (x, y) in enumerate(history)
+  @assert typeof(x) <: Int
+  @assert typeof(y) <: Float64
+end
+```
+
+### Tracking multiple values dynamically
+
+```Julia
+history = DynMultivalueHistory()
+
+for i = 1:100
+  # Store any kind of value
+  #   push!(history, key, iter, value)
+  push!(history, :myval1, i, i / 2)
+
+  # Sampling times can be arbitrarily spaced
+  i % 10 == 0 && i != 20 && push!(history, :myval2, float(i), "i=$i")
+end
+
+# Access stored values as arrays
+x, y = get(history, :myval1)
+@assert length(x) == length(y) == 100
+@assert typeof(x) <: Vector{Int}
+@assert typeof(y) <: Vector{Float64}
+
+x, y = get(history, :myval2)
+@assert length(x) == length(y) == 9
+@assert x == [10., 30., 40., 50., 60., 70., 80., 90., 100.]
+@assert y == ["i=10", "i=30", "i=40", "i=50", "i=60", "i=70", "i=80", "i=90", "i=100"]
+@assert typeof(x) <: Vector{Float64}
+@assert typeof(y) <: Vector{ASCIIString}
+
+# You can also enumerate over the observations
+for (x, y) in enumerate(history, :myval2)
+  @assert typeof(x) <: Float64
+  @assert typeof(y) <: ASCIIString
+end
+```
+
 ## Benchmarks
 
 Compilation already taken into account. The code can be found [here](https://github.com/Evizero/ValueHistories.jl/blob/master/test/bm_history.jl)
