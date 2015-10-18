@@ -22,6 +22,30 @@ Pkg.checkout("ValueHistories")
 
 ## Overview
 
+Available history types:
+
+- `QueueUnivalueHistory`
+- `VectorUnivalueHistory`
+- `DynMultivalueHistory`
+
+Supported operations for univalue histories:
+
+- `push!(history, iteration, value)`: Appends a value to the history
+- `get(history)`: Returns all available observations as two vectors. The first vector contains the iterations and the second vector contains the values.
+- `enumerate(history)` Returns an enumerator over the observations (as tuples)
+- `first(history)`: First stored observation (as tuple)
+- `last(history)`: Last stored observation (as tuple)
+- `length(history)`: Number of stored observations
+
+Supported operations for multivalue histories:
+
+- `push!(history, key, iteration, value)`: Appends a value to the multivalue history
+- `get(history, key)`: Returns all available observations as two vectors. The first vector contains the iterations and the second vector contains the values.
+- `enumerate(history, key)` Returns an enumerator over the observations (as tuples)
+- `first(history, key)`: First stored observation (as tuple)
+- `last(history, key)`: Last stored observation (as tuple)
+- `length(history, key)`: Number of stored observations
+
 ### Tracking a single value
 
 ```Julia
@@ -52,7 +76,8 @@ end
 history = DynMultivalueHistory()
 
 for i = 1:100
-  # Store any kind of value
+  # Store any kind of value without losing type stability
+  # The first push to a key defines the tracked type
   #   push!(history, key, iter, value)
   push!(history, :myval1, i, i / 2)
 
