@@ -14,6 +14,7 @@ using ValueHistories
 For the latest developer version:
 
 [![Build Status](https://travis-ci.org/Evizero/ValueHistories.jl.svg?branch=master)](https://travis-ci.org/Evizero/ValueHistories.jl)
+[![Coverage Status](https://coveralls.io/repos/Evizero/ValueHistories.jl/badge.svg?branch=master&service=github)](https://coveralls.io/github/Evizero/ValueHistories.jl?branch=master)
 
 ```Julia
 Pkg.checkout("ValueHistories")
