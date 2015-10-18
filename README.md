@@ -21,7 +21,7 @@ Pkg.checkout("ValueHistories")
 
 ## Benchmarks
 
-Compilation already taken into account
+Compilation already taken into account. The code can be found [here](https://github.com/Evizero/ValueHistories.jl/blob/master/test/bm_history.jl)
 
 ```
 Baseline: 100000 iterations that accumulates a Float64
