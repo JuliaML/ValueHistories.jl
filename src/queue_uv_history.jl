@@ -1,4 +1,4 @@
-type QueueUnivalueHistory{I<:Real,V} <: UnivalueHistory{I}
+type QueueUnivalueHistory{I,V} <: UnivalueHistory{I}
   lastiter::I
   storage::Queue{Deque{Tuple{I,V}}}
 
@@ -19,7 +19,7 @@ enumerate(history::QueueUnivalueHistory) = history.storage.store
 first(history::QueueUnivalueHistory) = front(history.storage)
 last(history::QueueUnivalueHistory) = back(history.storage)
 
-function push!{I<:Real,V}(
+function push!{I,V}(
     history::QueueUnivalueHistory{I,V},
     iteration::I,
     value::V)
@@ -30,7 +30,7 @@ function push!{I<:Real,V}(
   value
 end
 
-function get{I<:Real,V}(history::QueueUnivalueHistory{I,V})
+function get{I,V}(history::QueueUnivalueHistory{I,V})
   l = length(history)
   k, v = front(history.storage)
   karray = zeros(I, l)

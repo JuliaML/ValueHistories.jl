@@ -1,9 +1,9 @@
-immutable DynMultivalueHistory{I<:Integer, H<:UnivalueHistory} <: MultivalueHistory
+immutable DynMultivalueHistory{H<:UnivalueHistory} <: MultivalueHistory
   storage::Dict{Symbol, H}
 end
 
-function DynMultivalueHistory{I<:Integer, H<:UnivalueHistory}(::Type{H} = QueueUnivalueHistory, ::Type{I} = Int64)
-  DynMultivalueHistory{I,H}(Dict{Symbol, H}())
+function DynMultivalueHistory{H<:UnivalueHistory}(::Type{H} = QueueUnivalueHistory)
+  DynMultivalueHistory{H}(Dict{Symbol, H}())
 end
 
 # ==========================================================================
@@ -14,8 +14,8 @@ enumerate(history::DynMultivalueHistory, key::Symbol) = enumerate(history.storag
 first(history::DynMultivalueHistory, key::Symbol) = first(history.storage[key])
 last(history::DynMultivalueHistory, key::Symbol) = last(history.storage[key])
 
-function push!{I<:Integer,H<:UnivalueHistory,V}(
-    history::DynMultivalueHistory{I,H},
+function push!{I,H<:UnivalueHistory,V}(
+    history::DynMultivalueHistory{H},
     key::Symbol,
     iteration::I,
     value::V)
@@ -29,10 +29,10 @@ function push!{I<:Integer,H<:UnivalueHistory,V}(
   value
 end
 
-function get{I<:Integer}(history::DynMultivalueHistory{I}, key::Symbol)
+function get(history::DynMultivalueHistory, key::Symbol)
   l = length(history, key)
   k, v = first(history.storage[key])
-  karray = zeros(I, l)
+  karray = zeros(typeof(k), l)
   varray = Array(typeof(v), l)
   i = 1
   for (k, v) in enumerate(history, key)

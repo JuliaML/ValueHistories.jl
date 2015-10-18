@@ -1,5 +1,5 @@
 abstract ValueHistory
-abstract UnivalueHistory{I<:Real} <: ValueHistory
+abstract UnivalueHistory{I} <: ValueHistory
 abstract MultivalueHistory <: ValueHistory
 
 push!(history::UnivalueHistory, iteration, value) =

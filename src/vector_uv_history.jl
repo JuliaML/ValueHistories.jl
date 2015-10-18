@@ -1,4 +1,4 @@
-type VectorUnivalueHistory{I<:Real,V} <: UnivalueHistory{I}
+type VectorUnivalueHistory{I,V} <: UnivalueHistory{I}
   lastiter::I
   iterations::Vector{I}
   values::Vector{V}
@@ -18,7 +18,7 @@ first(history::VectorUnivalueHistory) = history.iterations[1], history.values[1]
 last(history::VectorUnivalueHistory) = history.iterations[end], history.values[end]
 get(history::VectorUnivalueHistory) = history.iterations, history.values
 
-function push!{I<:Real,V}(
+function push!{I,V}(
     history::VectorUnivalueHistory{I,V},
     iteration::I,
     value::V)

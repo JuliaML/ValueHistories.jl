@@ -52,7 +52,7 @@ a1, a2 = get(_history, :myf)
 
 msg("DynMultivalueHistory: Storing arbitrary types")
 
-_history = DynMultivalueHistory(QueueUnivalueHistory, UInt8)
+_history = DynMultivalueHistory(QueueUnivalueHistory)
 
 for i = 1:100
   @test push!(_history, :mystring, i % UInt8, string("i=", i + 1)) == string("i=", i+1)
