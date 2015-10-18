@@ -2,12 +2,13 @@ module ValueHistories
 
 using DataStructures
 
-import Base: length, push!, get, enumerate
+import Base: length, push!, get, enumerate, last, first
 
 export 
 
     ValueHistory,
       UnivalueHistory,
+        QueueUnivalueHistory,
       MultivalueHistory,
         DynMultivalueHistory
 

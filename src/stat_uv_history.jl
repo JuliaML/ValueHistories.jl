@@ -1,19 +1,21 @@
-immutable UnivalueHistory{I<:Integer,V} <: ValueHistory
+immutable QueueUnivalueHistory{I<:Real,V} <: UnivalueHistory{I}
   storage::Queue{Deque{Tuple{I,V}}}
 end
 
-function UnivalueHistory{I<:Integer,V}(::Type{V}, ::Type{I} = Int64)
-  UnivalueHistory{I,V}(Queue(Tuple{I,V}))
+function QueueUnivalueHistory{I<:Real,V}(::Type{V}, ::Type{I} = Int64)
+  QueueUnivalueHistory{I,V}(Queue(Tuple{I,V}))
 end
 
 # ==========================================================================
 #
 
-length(history::UnivalueHistory) = length(history.storage)
-enumerate(history::UnivalueHistory) = history.storage.store
+length(history::QueueUnivalueHistory) = length(history.storage)
+enumerate(history::QueueUnivalueHistory) = history.storage.store
+first(history::QueueUnivalueHistory) = front(history.storage)
+last(history::QueueUnivalueHistory) = back(history.storage)
 
-function push!{I<:Integer,V}(
-    history::UnivalueHistory{I,V},
+function push!{I<:Real,V}(
+    history::QueueUnivalueHistory{I,V},
     iteration::I,
     value::V)
   lastiter = zero(I)
@@ -25,7 +27,7 @@ function push!{I<:Integer,V}(
   value
 end
 
-function get{I<:Integer,V}(history::UnivalueHistory{I,V})
+function get{I<:Real,V}(history::QueueUnivalueHistory{I,V})
   l = length(history)
   k, v = front(history.storage)
   karray = zeros(I, l)
