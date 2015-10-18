@@ -1,8 +1,8 @@
 # ValueHistories
 
-## Installation
+Utility package for efficient tracking of optimization histories, training curves or other information of arbitray types with arbitrary sampling times
 
-Developed for Julia  v0.4
+## Installation
 
 [![Package Evaluator v4](http://pkg.julialang.org/badges/ValueHistories_0.4.svg)](http://pkg.julialang.org/?pkg=ValueHistories&ver=0.4)
 
