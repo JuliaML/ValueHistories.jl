@@ -21,6 +21,8 @@ for i = numbers
   end
 end
 
+@test_throws ArgumentError push!(_history, 200, :myf, "test")
+
 @test first(_history, :myf) == (0, 1)
 @test last(_history, :myf) == (100, 101)
 @test first(_history, :myint) == (0, -1)
