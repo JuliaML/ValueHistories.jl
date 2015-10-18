@@ -53,8 +53,7 @@ Supported operations for multivalue histories:
 history = QueueUnivalueHistory(Float64)
 
 for i = 1:100
-  # Store any kind of value
-  #   push!(history, iter, value)
+  # Store some value of the specified type
   push!(history, i, i / 2)
 end
 
@@ -77,7 +76,7 @@ history = DynMultivalueHistory()
 
 for i = 1:100
   # Store any kind of value without losing type stability
-  # The first push to a key defines the tracked type
+  # The first push! to a key defines the tracked type
   #   push!(history, key, iter, value)
   push!(history, :myval1, i, i / 2)
 
