@@ -1,9 +1,9 @@
 type QueueUnivalueHistory{I,V} <: UnivalueHistory{I}
   lastiter::I
-  storage::Queue{Deque{Tuple{I,V}}}
+  storage::Deque{Tuple{I,V}}
 
   function QueueUnivalueHistory(::Type{V}, ::Type{I})
-    new(typemin(I), Queue(Tuple{I,V}))
+    new(typemin(I), Deque{Tuple{I,V}}())
   end
 end
 
@@ -15,7 +15,7 @@ end
 #
 
 length(history::QueueUnivalueHistory) = length(history.storage)
-enumerate(history::QueueUnivalueHistory) = history.storage.store
+enumerate(history::QueueUnivalueHistory) = history.storage
 first(history::QueueUnivalueHistory) = front(history.storage)
 last(history::QueueUnivalueHistory) = back(history.storage)
 
@@ -26,7 +26,7 @@ function push!{I,V}(
   lastiter = history.lastiter
   iteration > lastiter || throw(ArgumentError("Iterations must increase over time"))
   history.lastiter = iteration
-  enqueue!(history.storage, (iteration, value))
+  push!(history.storage, (iteration, value))
   value
 end
 
