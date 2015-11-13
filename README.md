@@ -1,6 +1,6 @@
 # ValueHistories
 
-Utility package for efficient tracking of optimization histories, training curves or other information of arbitray types and at arbitrarily spaced sampling times
+Utility package for efficient tracking of optimization histories, training curves or other information of arbitrary types and at arbitrarily spaced sampling times
 
 ## Installation
 
@@ -13,8 +13,8 @@ using ValueHistories
 
 For the latest developer version:
 
-[![Build Status](https://travis-ci.org/Evizero/ValueHistories.jl.svg?branch=master)](https://travis-ci.org/Evizero/ValueHistories.jl)
-[![Coverage Status](https://coveralls.io/repos/Evizero/ValueHistories.jl/badge.svg?branch=master&service=github)](https://coveralls.io/github/Evizero/ValueHistories.jl?branch=master)
+[![Build Status](https://travis-ci.org/JuliaML/ValueHistories.jl.svg?branch=master)](https://travis-ci.org/JuliaML/ValueHistories.jl)
+[![Coverage Status](https://coveralls.io/repos/JuliaML/ValueHistories.jl/badge.svg?branch=master&service=github)](https://coveralls.io/github/JuliaML/ValueHistories.jl?branch=master)
 
 ```Julia
 Pkg.checkout("ValueHistories")
