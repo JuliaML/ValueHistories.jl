@@ -1,7 +1,6 @@
 module ValueHistories
 
 using DataStructures
-using UnicodePlots
 
 import Base: length, push!, get, enumerate, last, first, getindex
 

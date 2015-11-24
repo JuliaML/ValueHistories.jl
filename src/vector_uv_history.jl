@@ -36,12 +36,4 @@ function Base.show{I,V}(io::IO, history::VectorUnivalueHistory{I,V})
     println(io, "VectorUnivalueHistory")
     println(io, "  * types: $I, $V")
     print(io,   "  * length: $(length(history))")
-    if 1 < length(history) <= 500
-        if (V <: Real)
-            print(io, "\n  * preview:")
-            print(io, "\n", lineplot(get(history)..., width = 30, height = 7, margin = 4))
-        else
-            # barplot ?
-        end
-    end
 end
