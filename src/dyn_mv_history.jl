@@ -1,9 +1,9 @@
 immutable DynMultivalueHistory{H<:UnivalueHistory} <: MultivalueHistory
-  storage::Dict{Symbol, H}
+    storage::Dict{Symbol, H}
 end
 
 function DynMultivalueHistory{H<:UnivalueHistory}(::Type{H} = QueueUnivalueHistory)
-  DynMultivalueHistory{H}(Dict{Symbol, H}())
+    DynMultivalueHistory{H}(Dict{Symbol, H}())
 end
 
 # ==========================================================================
@@ -15,30 +15,41 @@ first(history::DynMultivalueHistory, key::Symbol) = first(history.storage[key])
 last(history::DynMultivalueHistory, key::Symbol) = last(history.storage[key])
 
 function push!{I,H<:UnivalueHistory,V}(
-    history::DynMultivalueHistory{H},
-    key::Symbol,
-    iteration::I,
-    value::V)
-  if !haskey(history.storage, key)
-    _hist = H(V, I)
-    push!(_hist, iteration, value)
-    history.storage[key] = _hist
-  else
-    push!(history.storage[key], iteration, value)
-  end
-  value
+        history::DynMultivalueHistory{H},
+        key::Symbol,
+        iteration::I,
+        value::V)
+    if !haskey(history.storage, key)
+        _hist = H(V, I)
+        push!(_hist, iteration, value)
+        history.storage[key] = _hist
+    else
+        push!(history.storage[key], iteration, value)
+    end
+    value
+end
+
+function getindex(history::DynMultivalueHistory, key::Symbol)
+    history.storage[key]
 end
 
 function get(history::DynMultivalueHistory, key::Symbol)
-  l = length(history, key)
-  k, v = first(history.storage[key])
-  karray = zeros(typeof(k), l)
-  varray = Array(typeof(v), l)
-  i = 1
-  for (k, v) in enumerate(history, key)
-    karray[i] = k
-    varray[i] = v
-    i += 1
-  end
-  karray, varray
+    l = length(history, key)
+    k, v = first(history.storage[key])
+    karray = zeros(typeof(k), l)
+    varray = Array(typeof(v), l)
+    i = 1
+    for (k, v) in enumerate(history, key)
+        karray[i] = k
+        varray[i] = v
+        i += 1
+    end
+    karray, varray
+end
+
+function Base.show{H}(io::IO, history::DynMultivalueHistory{H})
+    print(io, "DynMultivalueHistory{$H}")
+    for (key, val) in history.storage
+        print(io, "\n", "  :$(key) =>: $(val)")
+    end
 end

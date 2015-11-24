@@ -1,10 +1,11 @@
 module ValueHistories
 
 using DataStructures
+using UnicodePlots
 
-import Base: length, push!, get, enumerate, last, first
+import Base: length, push!, get, enumerate, last, first, getindex
 
-export 
+export
 
     ValueHistory,
       UnivalueHistory,

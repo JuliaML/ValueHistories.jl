@@ -6,18 +6,20 @@ msg("DynMultivalueHistory: Basic functions")
 _history = DynMultivalueHistory()
 
 function f(i, b; muh=10)
-  @test b == "yo"
-  @test muh == .3
-  i
+    @test b == "yo"
+    @test muh == .3
+    i
 end
 
 numbers = collect(-10:2:100)
 for i = numbers
-  @test push!(_history, :myf, i, f(i + 1, "yo", muh = .3)) == i + 1
-  if i % 11 == 0
-    @test push!(_history, :myint, i, i - 1) == i - 1
-  end
+    @test push!(_history, :myf, i, f(i + 1, "yo", muh = .3)) == i + 1
+    if i % 11 == 0
+        @test push!(_history, :myint, i, i - 1) == i - 1
+    end
 end
+
+show(_history); println()
 
 @test_throws ArgumentError push!(_history, :myf, 200, "test")
 
@@ -27,14 +29,14 @@ end
 @test last(_history, :myint) == (88, 87)
 
 for (i, v) in enumerate(_history, :myf)
-  @test in(i, numbers)
-  @test i + 1 == v
+    @test in(i, numbers)
+    @test i + 1 == v
 end
 
 for (i, v) in enumerate(_history, :myint)
-  @test in(i, numbers)
-  @test i % 11 == 0
-  @test i - 1 == v
+    @test in(i, numbers)
+    @test i % 11 == 0
+    @test i - 1 == v
 end
 
 a1, a2 = get(_history, :myf)
@@ -53,8 +55,8 @@ msg("DynMultivalueHistory: Storing arbitrary types")
 _history = DynMultivalueHistory(QueueUnivalueHistory)
 
 for i = 1:100
-  @test push!(_history, :mystring, i % UInt8, string("i=", i + 1)) == string("i=", i+1)
-  @test push!(_history, :myfloat, i % UInt8, Float32(i + 1)) == Float32(i+1)
+    @test push!(_history, :mystring, i % UInt8, string("i=", i + 1)) == string("i=", i+1)
+    @test push!(_history, :myfloat, i % UInt8, Float32(i + 1)) == Float32(i+1)
 end
 
 a1, a2 = get(_history, :mystring)
