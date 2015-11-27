@@ -14,12 +14,12 @@ end
 # ==========================================================================
 #
 
-length(history::QueueUnivalueHistory) = length(history.storage)
-enumerate(history::QueueUnivalueHistory) = history.storage
-first(history::QueueUnivalueHistory) = front(history.storage)
-last(history::QueueUnivalueHistory) = back(history.storage)
+Base.length(history::QueueUnivalueHistory) = length(history.storage)
+Base.enumerate(history::QueueUnivalueHistory) = history.storage
+Base.first(history::QueueUnivalueHistory) = front(history.storage)
+Base.last(history::QueueUnivalueHistory) = back(history.storage)
 
-function push!{I,V}(
+function Base.push!{I,V}(
         history::QueueUnivalueHistory{I,V},
         iteration::I,
         value::V)
@@ -30,7 +30,7 @@ function push!{I,V}(
     value
 end
 
-function get{I,V}(history::QueueUnivalueHistory{I,V})
+function Base.get{I,V}(history::QueueUnivalueHistory{I,V})
     l = length(history)
     k, v = front(history.storage)
     karray = zeros(I, l)

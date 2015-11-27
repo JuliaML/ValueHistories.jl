@@ -9,12 +9,12 @@ end
 # ==========================================================================
 # Functions
 
-length(history::DynMultivalueHistory, key::Symbol) = length(history.storage[key])
-enumerate(history::DynMultivalueHistory, key::Symbol) = enumerate(history.storage[key])
-first(history::DynMultivalueHistory, key::Symbol) = first(history.storage[key])
-last(history::DynMultivalueHistory, key::Symbol) = last(history.storage[key])
+Base.length(history::DynMultivalueHistory, key::Symbol) = length(history.storage[key])
+Base.enumerate(history::DynMultivalueHistory, key::Symbol) = enumerate(history.storage[key])
+Base.first(history::DynMultivalueHistory, key::Symbol) = first(history.storage[key])
+Base.last(history::DynMultivalueHistory, key::Symbol) = last(history.storage[key])
 
-function push!{I,H<:UnivalueHistory,V}(
+function Base.push!{I,H<:UnivalueHistory,V}(
         history::DynMultivalueHistory{H},
         key::Symbol,
         iteration::I,
@@ -29,11 +29,11 @@ function push!{I,H<:UnivalueHistory,V}(
     value
 end
 
-function getindex(history::DynMultivalueHistory, key::Symbol)
+function Base.getindex(history::DynMultivalueHistory, key::Symbol)
     history.storage[key]
 end
 
-function get(history::DynMultivalueHistory, key::Symbol)
+function Base.get(history::DynMultivalueHistory, key::Symbol)
     l = length(history, key)
     k, v = first(history.storage[key])
     karray = zeros(typeof(k), l)

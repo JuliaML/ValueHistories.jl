@@ -2,8 +2,6 @@ module ValueHistories
 
 using DataStructures
 
-import Base: length, push!, get, enumerate, last, first, getindex
-
 export
 
     ValueHistory,
