@@ -30,6 +30,16 @@ function Base.push!{I,V}(
     value
 end
 
+function Base.push!{I,V}(
+        history::QueueUnivalueHistory{I,V},
+        value::V)
+    lastiter = history.lastiter == typemin(I) ? zero(I) : history.lastiter
+    iteration = lastiter + one(history.lastiter)
+    history.lastiter = iteration
+    push!(history.storage, (iteration, value))
+    value
+end
+
 function Base.get{I,V}(history::QueueUnivalueHistory{I,V})
     l = length(history)
     k, v = front(history.storage)

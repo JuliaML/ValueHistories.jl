@@ -15,6 +15,17 @@ for T in [VectorUnivalueHistory, QueueUnivalueHistory]
 
     _history = T(Float64)
 
+    numbers = collect(1:100)
+    push!(_history, 10, Float64(5))
+    for i = numbers
+        @test push!(_history, Float64(i + 1)) == Float64(i + 1)
+    end
+
+    @test first(_history) == (10, 5.)
+    @test last(_history) == (110, 101.)
+
+    _history = T(Float64)
+
     numbers = collect(1:2:200)
     for i = numbers
         @test push!(_history, i, Float64(i + 1)) == Float64(i + 1)
@@ -34,6 +45,13 @@ for T in [VectorUnivalueHistory, QueueUnivalueHistory]
     @test typeof(a1) <: Vector{Int} && typeof(a2) <: Vector{Float64}
     @test length(a1) == length(a2) == length(numbers) == length(_history)
     @test convert(Vector{Float64}, a1 + 1) == a2
+
+    #-----------------------------------------------------------
+
+    msg("$(T.name.name): No explicit iteration")
+
+
+    _history = T(Float64)
 
     #-----------------------------------------------------------
 

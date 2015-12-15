@@ -30,6 +30,17 @@ function Base.push!{I,V}(
     value
 end
 
+function Base.push!{I,V}(
+        history::VectorUnivalueHistory{I,V},
+        value::V)
+    lastiter = history.lastiter == typemin(I) ? zero(I) : history.lastiter
+    iteration = lastiter + one(history.lastiter)
+    history.lastiter = iteration
+    push!(history.iterations, iteration)
+    push!(history.values, value)
+    value
+end
+
 Base.print{I,V}(io::IO, history::VectorUnivalueHistory{I,V}) = print(io, "$(length(history)) elements {$I,$V}")
 
 function Base.show{I,V}(io::IO, history::VectorUnivalueHistory{I,V})
