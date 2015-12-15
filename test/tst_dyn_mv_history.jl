@@ -16,6 +16,7 @@ for i = numbers
     @test push!(_history, :myf, i, f(i + 1, "yo", muh = .3)) == i + 1
     if i % 11 == 0
         @test push!(_history, :myint, i, i - 1) == i - 1
+        @test push!(_history, :myint2, i - 1) == i - 1
     end
 end
 
@@ -27,6 +28,8 @@ show(_history); println()
 @test last(_history, :myf) == (100, 101)
 @test first(_history, :myint) == (0, -1)
 @test last(_history, :myint) == (88, 87)
+@test first(_history, :myint2) == (1, -1)
+@test last(_history, :myint2) == (5, 87)
 
 for (i, v) in enumerate(_history, :myf)
     @test in(i, numbers)

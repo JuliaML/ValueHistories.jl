@@ -29,6 +29,20 @@ function Base.push!{I,H<:UnivalueHistory,V}(
     value
 end
 
+function Base.push!{H<:UnivalueHistory,V}(
+        history::DynMultivalueHistory{H},
+        key::Symbol,
+        value::V)
+    if !haskey(history.storage, key)
+        _hist = H(V, Int)
+        push!(_hist, value)
+        history.storage[key] = _hist
+    else
+        push!(history.storage[key], value)
+    end
+    value
+end
+
 function Base.getindex(history::DynMultivalueHistory, key::Symbol)
     history.storage[key]
 end
