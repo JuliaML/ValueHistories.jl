@@ -8,6 +8,7 @@ Utility package for efficient tracking of optimization histories, training curve
 ## Installation
 
 [![Package Evaluator v4](http://pkg.julialang.org/badges/ValueHistories_0.4.svg)](http://pkg.julialang.org/?pkg=ValueHistories&ver=0.4)
+[![Package Evaluator v5](http://pkg.julialang.org/badges/ValueHistories_0.5.svg)](http://pkg.julialang.org/?pkg=ValueHistories&ver=0.5)
 
 ```Julia
 Pkg.add("ValueHistories")
