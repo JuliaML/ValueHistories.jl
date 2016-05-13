@@ -17,7 +17,7 @@ using ValueHistories
 For the latest developer version:
 
 [![Build Status](https://travis-ci.org/JuliaML/ValueHistories.jl.svg?branch=master)](https://travis-ci.org/JuliaML/ValueHistories.jl)
-[![Coverage Status](https://coveralls.io/repos/JuliaML/ValueHistories.jl/badge.svg?branch=master&service=github)](https://coveralls.io/github/JuliaML/ValueHistories.jl?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/JuliaML/ValueHistories.jl/badge.svg?branch=master)](https://coveralls.io/github/JuliaML/ValueHistories.jl?branch=master)
 
 ```Julia
 Pkg.checkout("ValueHistories")
