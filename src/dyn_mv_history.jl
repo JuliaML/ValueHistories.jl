@@ -2,7 +2,7 @@ immutable DynMultivalueHistory{H<:UnivalueHistory} <: MultivalueHistory
     storage::Dict{Symbol, H}
 end
 
-function DynMultivalueHistory{H<:UnivalueHistory}(::Type{H} = QueueUnivalueHistory)
+function DynMultivalueHistory{H<:UnivalueHistory}(::Type{H} = VectorUnivalueHistory)
     DynMultivalueHistory{H}(Dict{Symbol, H}())
 end
 
