@@ -64,6 +64,6 @@ end
 function Base.show{H}(io::IO, history::DynMultivalueHistory{H})
     print(io, "DynMultivalueHistory{$H}")
     for (key, val) in history.storage
-        print(io, "\n", "  :$(key) =>: $(val)")
+        print(io, "\n", "  :$(key) => $(val)")
     end
 end
