@@ -172,23 +172,23 @@ plot(history)
 Compilation already taken into account. The code can be found [here](https://github.com/Evizero/ValueHistories.jl/blob/master/test/bm_history.jl)
 
 ```
-Baseline: 100000 iterations that accumulates a Float64
-  0.018450 seconds (498.98 k allocations: 9.140 MB, 15.75% gc time)
+Baseline: 100000 loops that accumulates a Float64
+  0.000127 seconds (5 allocations: 176 bytes)
 
-VectorUnivalueHistory: 100000 iterations tracking accumulator of accumulator as Float64
-  0.024337 seconds (599.01 k allocations: 14.667 MB, 7.92% gc time)
+VectorUnivalueHistory: 100000 loops tracking accumulator as Float64
+  0.003651 seconds (33 allocations: 4.001 MB)
 VectorUnivalueHistory: Converting result into arrays
-  0.000009 seconds (3 allocations: 96 bytes)
+  0.000010 seconds (3 allocations: 96 bytes)
 
-QueueUnivalueHistory: 100000 iterations tracking accumulator of accumulator as Float64
-  0.020105 seconds (599.17 k allocations: 12.195 MB)
+QueueUnivalueHistory: 100000 loops tracking accumulator as Float64
+  0.002141 seconds (195 allocations: 1.529 MB)
 QueueUnivalueHistory: Converting result into arrays
-  0.003722 seconds (100.01 k allocations: 4.578 MB, 58.66% gc time)
+  0.217000 seconds (1.60 M allocations: 35.067 MB, 3.63% gc time)
 
-DynMultivalueHistory: 100000 iterations tracking accumulator as Float64 and String
-  0.194958 seconds (2.10 M allocations: 70.558 MB, 22.73% gc time)
+DynMultivalueHistory: 100000 loops tracking accumulator as Float64 and String
+  0.185134 seconds (1.70 M allocations: 62.937 MB, 31.24% gc time)
 DynMultivalueHistory: Converting result into arrays
-  0.110471 seconds (1.39 M allocations: 28.914 MB, 17.87% gc time)
+  0.194542 seconds (1.39 M allocations: 28.914 MB, 25.88% gc time)
 ```
 
 ## License
