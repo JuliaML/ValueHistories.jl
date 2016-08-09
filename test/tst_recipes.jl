@@ -31,7 +31,7 @@ macro plottest(testname, expr)
 end
 
 @plottest "dynmv" begin
-	history = ValueHistories.DynMultivalueHistory(QueueUnivalueHistory)
+	history = ValueHistories.DictMultivalueHistory(QueueUnivalueHistory)
 	for i=1:100
 		x = 0.1i
 		push!(history, :a, x, sin(x))
@@ -44,7 +44,7 @@ end
 end
 
 @plottest "dynmv_sub" begin
-	history = ValueHistories.DynMultivalueHistory()
+	history = ValueHistories.DictMultivalueHistory()
 	for i=1:100
 		x = 0.1i
 		push!(history, :a, x, sin(x))

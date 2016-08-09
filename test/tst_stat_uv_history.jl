@@ -2,8 +2,8 @@ for T in [VectorUnivalueHistory, QueueUnivalueHistory]
     @testset "$(T.name.name): Basic functions" begin
         _history = T(Float64)
 
-        @test push!(_history, 1, 10.) == 10.
-        @test push!(_history, 2, 21.) == 21.
+        @test log!(_history, 1, 10.) == 10.
+        @test log!(_history, 2, 21.) == 21.
 
         @test_throws ArgumentError push!(_history, 1, 11.)
         @test_throws ArgumentError push!(_history, 2, 10)
@@ -13,7 +13,7 @@ for T in [VectorUnivalueHistory, QueueUnivalueHistory]
         numbers = collect(1:100)
         push!(_history, 10, Float64(5))
         for i = numbers
-            @test push!(_history, Float64(i + 1)) == Float64(i + 1)
+            @test log!(_history, Float64(i + 1)) == Float64(i + 1)
         end
 
         @test first(_history) == (10, 5.)
@@ -23,7 +23,7 @@ for T in [VectorUnivalueHistory, QueueUnivalueHistory]
 
         numbers = collect(1:2:200)
         for i = numbers
-            @test push!(_history, i, Float64(i + 1)) == Float64(i + 1)
+            @test log!(_history, i, Float64(i + 1)) == Float64(i + 1)
         end
 
         println(_history)
@@ -51,7 +51,7 @@ for T in [VectorUnivalueHistory, QueueUnivalueHistory]
         _history = T(ASCIIString, UInt8)
 
         for i = 1:100
-            @test push!(_history, i % UInt8, string("i=", i + 1)) == string("i=", i+1)
+            @test log!(_history, i % UInt8, string("i=", i + 1)) == string("i=", i+1)
         end
 
         show(_history); println()

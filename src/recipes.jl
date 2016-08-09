@@ -1,10 +1,8 @@
-using ValueHistories
-
 _is_plotable_history(::UnivalueHistory) = false
 _is_plotable_history{I,V<:Real}(::QueueUnivalueHistory{I,V}) = true
 _is_plotable_history{I,V<:Real}(::VectorUnivalueHistory{I,V}) = true
 
-_filter_plotable_histories(h::DynMultivalueHistory) =
+_filter_plotable_histories(h::DictMultivalueHistory) =
     filter((k,v) -> _is_plotable_history(v), h.storage)
 
 @recipe function plot(h::Union{VectorUnivalueHistory,QueueUnivalueHistory})
@@ -13,7 +11,7 @@ _filter_plotable_histories(h::DynMultivalueHistory) =
     get(h)
 end
 
-@recipe function plot(h::DynMultivalueHistory)
+@recipe function plot(h::DictMultivalueHistory)
     filtered = _filter_plotable_histories(h)
     k_vec = [k for (k, v) in filtered]
     v_vec = [v for (k, v) in filtered]

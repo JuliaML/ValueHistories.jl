@@ -1,5 +1,5 @@
-@testset "DynMultivalueHistory: Basic functions" begin
-    _history = DynMultivalueHistory()
+@testset "DictMultivalueHistory: Basic functions" begin
+    _history = DictMultivalueHistory()
 
     function f(i, b; muh=10)
         @test b == "yo"
@@ -9,10 +9,10 @@
 
     numbers = collect(-10:2:100)
     for i = numbers
-        @test push!(_history, :myf, i, f(i + 1, "yo", muh = .3)) == i + 1
+        @test log!(_history, :myf, i, f(i + 1, "yo", muh = .3)) == i + 1
         if i % 11 == 0
-            @test push!(_history, :myint, i, i - 1) == i - 1
-            @test push!(_history, :myint2, i - 1) == i - 1
+            @test typeof(push!(_history, :myint, i, i - 1)) <: DictMultivalueHistory
+            @test log!(_history, :myint2, i - 1) == i - 1
         end
     end
 
@@ -46,17 +46,17 @@
     @test length(a1) == length(a2) == length(numbers) == length(_history, :myf)
     @test a1 + 1 == a2
 
-    @test_throws ArgumentError push!(_history, :myf, 10, f(10, "yo", muh = .3))
+    @test_throws ArgumentError log!(_history, :myf, 10, f(10, "yo", muh = .3))
     @test_throws KeyError enumerate(_history, :sign)
     @test_throws KeyError length(_history, :sign)
 end
 
-@testset "DynMultivalueHistory: Storing arbitrary types" begin
-    _history = DynMultivalueHistory(QueueUnivalueHistory)
+@testset "DictMultivalueHistory: Storing arbitrary types" begin
+    _history = DictMultivalueHistory(QueueUnivalueHistory)
 
     for i = 1:100
-        @test push!(_history, :mystring, i % UInt8, string("i=", i + 1)) == string("i=", i+1)
-        @test push!(_history, :myfloat, i % UInt8, Float32(i + 1)) == Float32(i+1)
+        @test log!(_history, :mystring, i % UInt8, string("i=", i + 1)) == string("i=", i+1)
+        @test log!(_history, :myfloat, i % UInt8, Float32(i + 1)) == Float32(i+1)
     end
 
     @test typeof(_history[:mystring]) <: QueueUnivalueHistory
