@@ -1,17 +1,16 @@
 using ValueHistories
-using Base.Test
 
-function msg(args...; newline = true)
-    print("   --> ", args...)
-    newline && println()
+if VERSION >= v"0.5-"
+    using Base.Test
+else
+    using BaseTestNext
+    const Test = BaseTestNext
 end
-
-# ==========================================================================
-# Specify tests
 
 tests = [
     "tst_stat_uv_history.jl"
     "tst_dyn_mv_history.jl"
+    "tst_recipes.jl"
 ]
 
 perf = [
@@ -19,15 +18,13 @@ perf = [
 ]
 
 for t in tests
-    println("[->] $t")
-    include(t)
-    println("[OK] $t")
-    println("====================================================================")
+    @testset "[->] $t" begin
+        include(t)
+    end
 end
 
 for p in perf
-    println("[->] $p")
-    include(p)
-    println("[OK] $p")
-    println("====================================================================")
+    @testset "[->] $p" begin
+        include(p)
+    end
 end

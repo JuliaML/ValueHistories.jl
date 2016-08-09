@@ -1,5 +1,7 @@
-
-#-----------------------------------------------------------
+function msg(args...; newline = true)
+    print("   --> ", args...)
+    newline && println()
+end
 
 n = 100
 
