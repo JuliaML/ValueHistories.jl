@@ -1,15 +1,6 @@
 using Plots
 using VisualRegressionTests
 
-# don't let pyplot use a gui... it'll crash
-# note: Agg will set gui -> :none in PyPlot
-ENV["MPLBACKEND"] = "Agg"
-import PyPlot
-info("Matplotlib version: $(PyPlot.matplotlib[:__version__])")
-pyplot(size=(200,150), reuse=true)
-
-refdir = Pkg.dir("ValueHistories", "test", "refimg")
-
 # run a visual regression test comparing the output to the saved reference png
 function dotest(testname, func)
     srand(1)
@@ -29,6 +20,15 @@ macro plottest(testname, expr)
         end)
     end)
 end
+
+# don't let pyplot use a gui... it'll crash
+# note: Agg will set gui -> :none in PyPlot
+withenv("MPLBACKEND" => "Agg") do
+import PyPlot
+info("Matplotlib version: $(PyPlot.matplotlib[:__version__])")
+pyplot(size=(200,150), reuse=true)
+
+refdir = joinpath(dirname(@__FILE__), "refimg")
 
 @plottest "dynmv" begin
 	history = ValueHistories.DynMultivalueHistory(QueueUnivalueHistory)
@@ -81,3 +81,5 @@ end
 	end
 	plot([history1, history2], layout = 2)
 end
+
+end # withenv
