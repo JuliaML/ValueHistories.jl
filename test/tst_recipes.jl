@@ -23,7 +23,10 @@ end
 
 # don't let pyplot use a gui... it'll crash
 # note: Agg will set gui -> :none in PyPlot
-withenv("MPLBACKEND" => "Agg") do
+# - This unglyness needs to change
+had_mlp = haskey(ENV, "MPLBACKEND")
+_old_env = get(ENV, "MPLBACKEND", "")
+ENV["MPLBACKEND"] = "Agg"
 import PyPlot
 info("Matplotlib version: $(PyPlot.matplotlib[:__version__])")
 pyplot(size=(200,150), reuse=true)
@@ -82,4 +85,9 @@ end
 	plot([history1, history2], layout = 2)
 end
 
-end # withenv
+if had_mlp
+    ENV["MPLBACKEND"] = _old_env
+else
+    delete!(ENV, "MPLBACKEND")
+end
+

@@ -1,5 +1,3 @@
-using ValueHistories
-
 _is_plotable_history(::UnivalueHistory) = false
 _is_plotable_history{I,V<:Real}(::QueueUnivalueHistory{I,V}) = true
 _is_plotable_history{I,V<:Real}(::VectorUnivalueHistory{I,V}) = true
