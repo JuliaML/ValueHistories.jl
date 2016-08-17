@@ -10,7 +10,6 @@ end
 tests = [
     "tst_stat_uv_history.jl"
     "tst_dyn_mv_history.jl"
-    "tst_recipes.jl"
 ]
 
 perf = [

@@ -1,3 +1,5 @@
+# THIS FILE IS DEACTIVATED
+
 using Plots
 using VisualRegressionTests
 
