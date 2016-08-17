@@ -2,11 +2,12 @@ for T in [VectorUnivalueHistory, QueueUnivalueHistory]
     @testset "$(T.name.name): Basic functions" begin
         _history = T(Float64)
 
-        @test push!(_history, 1, 10.) == 10.
-        @test push!(_history, 2, 21.) == 21.
+        @test push!(_history, 1, 10.) == Float64(10.)
+        @test push!(_history, 2, Float64(21.)) == Float64(21.)
 
-        @test_throws ArgumentError push!(_history, 1, 11.)
+        @test_throws ArgumentError push!(_history, 1, Float64(11.))
         @test_throws ArgumentError push!(_history, 2, 10)
+        @test_throws ArgumentError push!(_history, 3, Float32(10))
 
         _history = T(Float64)
 
@@ -16,8 +17,8 @@ for T in [VectorUnivalueHistory, QueueUnivalueHistory]
             @test push!(_history, Float64(i + 1)) == Float64(i + 1)
         end
 
-        @test first(_history) == (10, 5.)
-        @test last(_history) == (110, 101.)
+        @test first(_history) == (10, Float64(5.))
+        @test last(_history) == (110, Float64(101.))
 
         _history = T(Float64)
 
@@ -29,8 +30,8 @@ for T in [VectorUnivalueHistory, QueueUnivalueHistory]
         println(_history)
         show(_history); println()
 
-        @test first(_history) == (1, 2.)
-        @test last(_history) == (199, 200.)
+        @test first(_history) == (1, Float64(2.))
+        @test last(_history) == (199, Float64(200.))
 
         for (i, v) in enumerate(_history)
             @test in(i, numbers)

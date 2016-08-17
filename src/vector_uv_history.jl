@@ -8,7 +8,7 @@ type VectorUnivalueHistory{I,V} <: UnivalueHistory{I}
     end
 end
 
-function VectorUnivalueHistory{I,V}(v::Type{V}, i::Type{I} = Int64)
+function VectorUnivalueHistory{I,V}(v::Type{V}, i::Type{I} = Int)
     VectorUnivalueHistory{I,V}(v, i)
 end
 

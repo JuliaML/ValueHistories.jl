@@ -7,7 +7,7 @@ type QueueUnivalueHistory{I,V} <: UnivalueHistory{I}
     end
 end
 
-function QueueUnivalueHistory{I,V}(v::Type{V}, i::Type{I} = Int64)
+function QueueUnivalueHistory{I,V}(v::Type{V}, i::Type{I} = Int)
     QueueUnivalueHistory{I,V}(v, i)
 end
 
