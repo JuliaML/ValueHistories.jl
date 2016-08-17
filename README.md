@@ -88,7 +88,7 @@ using Plots
 plot(history, legend=false)
 ```
 
-![univalue](https://cloud.githubusercontent.com/assets/10854026/17511646/2eeae5d2-5e24-11e6-805c-527ebe60edd2.png)
+![univalue](https://cloud.githubusercontent.com/assets/10854026/17746218/70d10760-64af-11e6-94c4-b711a9ac018b.png)
 
 ### Multivalue Histories
 
@@ -164,7 +164,7 @@ using Plots
 plot(history)
 ```
 
-![multivalue](https://cloud.githubusercontent.com/assets/10854026/17512899/58461c20-5e2a-11e6-94d4-b4699c63ab1a.png)
+![multivalue](https://cloud.githubusercontent.com/assets/10854026/17746217/70d0ad9c-64af-11e6-8453-bf94aad32571.png)
 
 
 ## Benchmarks
