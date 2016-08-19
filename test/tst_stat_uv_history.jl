@@ -49,7 +49,7 @@ for T in [VectorUnivalueHistory, QueueUnivalueHistory]
     end
 
     @testset "$(T.name.name): Storing arbitrary types" begin
-        _history = T(ASCIIString, UInt8)
+        _history = T(String, UInt8)
 
         for i = 1:100
             @test push!(_history, i % UInt8, string("i=", i + 1)) == string("i=", i+1)
@@ -59,6 +59,6 @@ for T in [VectorUnivalueHistory, QueueUnivalueHistory]
 
         a1, a2 = get(_history)
         @test typeof(a1) <: Vector{UInt8}
-        @test typeof(a2) <: Vector{ASCIIString}
+        @test typeof(a2) <: Vector{String}
     end
 end
