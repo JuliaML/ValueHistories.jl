@@ -13,6 +13,10 @@ export
         MVHistory,
     @trace
 
+Base.@deprecate_binding VectorUnivalueHistory History
+Base.@deprecate_binding QueueUnivalueHistory QHistory
+Base.@deprecate_binding DynMultivalueHistory MVHistory
+
 include("abstract_history.jl")
 include("queue_uv_history.jl")
 include("vector_uv_history.jl")
