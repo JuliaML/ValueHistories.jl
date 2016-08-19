@@ -35,8 +35,8 @@ a label
 
 This package provide two different concrete implementations
 
-- `QueueUnivalueHistory`: Logs the values using a `Dequeue`
-- `VectorUnivalueHistory`: Logs the values using a `Vector`
+- `QHistory`: Logs the values using a `Dequeue`
+- `History`: Logs the values using a `Vector`
 
 Supported operations for univalue histories:
 
@@ -51,7 +51,7 @@ Here is a little example code showing the basic usage:
 
 ```Julia
 # Specify the type of value you wish to track
-history = QueueUnivalueHistory(Float64)
+history = QHistory(Float64)
 
 for i = 1:100
   # Store some value of the specified type
@@ -75,7 +75,7 @@ history
 ```
 
 ```
-QueueUnivalueHistory
+QHistory
     types: Int64, Float64
     length: 25
 ```
@@ -110,7 +110,7 @@ Supported operations for multivalue histories:
 Here is a little example code showing the basic usage:
 
 ```Julia
-history = DynMultivalueHistory()
+history = MVHistory()
 
 for i=1:100
     x = 0.1i
@@ -150,7 +150,7 @@ history
 ```
 
 ```
-DynMultivalueHistory{ValueHistories.VectorUnivalueHistory{I,V}}
+MVHistory{ValueHistories.History{I,V}}
   :mysin => 100 elements {Float64,Float64}
   :mystring => 100 elements {Int64,ASCIIString}
   :mycos => 25 elements {Float32,Float64}
@@ -175,19 +175,19 @@ Compilation already taken into account. The code can be found [here](https://git
 Baseline: 100000 loops that accumulates a Float64
   0.000127 seconds (5 allocations: 176 bytes)
 
-VectorUnivalueHistory: 100000 loops tracking accumulator as Float64
+History: 100000 loops tracking accumulator as Float64
   0.003651 seconds (33 allocations: 4.001 MB)
-VectorUnivalueHistory: Converting result into arrays
+History: Converting result into arrays
   0.000010 seconds (3 allocations: 96 bytes)
 
-QueueUnivalueHistory: 100000 loops tracking accumulator as Float64
+QHistory: 100000 loops tracking accumulator as Float64
   0.002141 seconds (195 allocations: 1.529 MB)
-QueueUnivalueHistory: Converting result into arrays
+QHistory: Converting result into arrays
   0.217000 seconds (1.60 M allocations: 35.067 MB, 3.63% gc time)
 
-DynMultivalueHistory: 100000 loops tracking accumulator as Float64 and String
+MVHistory: 100000 loops tracking accumulator as Float64 and String
   0.185134 seconds (1.70 M allocations: 62.937 MB, 31.24% gc time)
-DynMultivalueHistory: Converting result into arrays
+MVHistory: Converting result into arrays
   0.194542 seconds (1.39 M allocations: 28.914 MB, 25.88% gc time)
 ```
 

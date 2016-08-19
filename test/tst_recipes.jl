@@ -36,7 +36,7 @@ pyplot(size=(200,150), reuse=true)
 refdir = joinpath(dirname(@__FILE__), "refimg")
 
 @plottest "dynmv" begin
-	history = ValueHistories.DynMultivalueHistory(QueueUnivalueHistory)
+	history = ValueHistories.MVHistory(QHistory)
 	for i=1:100
 		x = 0.1i
 		push!(history, :a, x, sin(x))
@@ -49,7 +49,7 @@ refdir = joinpath(dirname(@__FILE__), "refimg")
 end
 
 @plottest "dynmv_sub" begin
-	history = ValueHistories.DynMultivalueHistory()
+	history = ValueHistories.MVHistory()
 	for i=1:100
 		x = 0.1i
 		push!(history, :a, x, sin(x))
@@ -62,7 +62,7 @@ end
 end
 
 @plottest "queueuv" begin
-	history = ValueHistories.QueueUnivalueHistory(Int)
+	history = ValueHistories.QHistory(Int)
 	for i = 1:100
 		push!(history, i, 2i)
 	end
@@ -70,7 +70,7 @@ end
 end
 
 @plottest "vectoruv" begin
-	history = ValueHistories.VectorUnivalueHistory(Int)
+	history = ValueHistories.History(Int)
 	for i = 1:100
 		push!(history, i, 100-i)
 	end
@@ -78,8 +78,8 @@ end
 end
 
 @plottest "uv_vector" begin
-	history1 = ValueHistories.VectorUnivalueHistory(Int)
-	history2 = ValueHistories.QueueUnivalueHistory(Int)
+	history1 = ValueHistories.History(Int)
+	history2 = ValueHistories.QHistory(Int)
 	for i = 1:100
 		push!(history1, i, 2i)
 		push!(history2, i, 100-i)

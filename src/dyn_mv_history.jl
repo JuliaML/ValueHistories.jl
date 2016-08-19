@@ -1,21 +1,21 @@
-immutable DynMultivalueHistory{H<:UnivalueHistory} <: MultivalueHistory
+immutable MVHistory{H<:UnivalueHistory} <: MultivalueHistory
     storage::Dict{Symbol, H}
 end
 
-function DynMultivalueHistory{H<:UnivalueHistory}(::Type{H} = VectorUnivalueHistory)
-    DynMultivalueHistory{H}(Dict{Symbol, H}())
+function MVHistory{H<:UnivalueHistory}(::Type{H} = History)
+    MVHistory{H}(Dict{Symbol, H}())
 end
 
 # ==========================================================================
 # Functions
 
-Base.length(history::DynMultivalueHistory, key::Symbol) = length(history.storage[key])
-Base.enumerate(history::DynMultivalueHistory, key::Symbol) = enumerate(history.storage[key])
-Base.first(history::DynMultivalueHistory, key::Symbol) = first(history.storage[key])
-Base.last(history::DynMultivalueHistory, key::Symbol) = last(history.storage[key])
+Base.length(history::MVHistory, key::Symbol) = length(history.storage[key])
+Base.enumerate(history::MVHistory, key::Symbol) = enumerate(history.storage[key])
+Base.first(history::MVHistory, key::Symbol) = first(history.storage[key])
+Base.last(history::MVHistory, key::Symbol) = last(history.storage[key])
 
 function Base.push!{I,H<:UnivalueHistory,V}(
-        history::DynMultivalueHistory{H},
+        history::MVHistory{H},
         key::Symbol,
         iteration::I,
         value::V)
@@ -30,7 +30,7 @@ function Base.push!{I,H<:UnivalueHistory,V}(
 end
 
 function Base.push!{H<:UnivalueHistory,V}(
-        history::DynMultivalueHistory{H},
+        history::MVHistory{H},
         key::Symbol,
         value::V)
     if !haskey(history.storage, key)
@@ -43,13 +43,13 @@ function Base.push!{H<:UnivalueHistory,V}(
     value
 end
 
-function Base.getindex(history::DynMultivalueHistory, key::Symbol)
+function Base.getindex(history::MVHistory, key::Symbol)
     history.storage[key]
 end
 
-Base.haskey(history::DynMultivalueHistory, key::Symbol) = haskey(history.storage, key)
+Base.haskey(history::MVHistory, key::Symbol) = haskey(history.storage, key)
 
-function Base.get(history::DynMultivalueHistory, key::Symbol)
+function Base.get(history::MVHistory, key::Symbol)
     l = length(history, key)
     k, v = first(history.storage[key])
     karray = zeros(typeof(k), l)
@@ -63,8 +63,8 @@ function Base.get(history::DynMultivalueHistory, key::Symbol)
     karray, varray
 end
 
-function Base.show{H}(io::IO, history::DynMultivalueHistory{H})
-    print(io, "DynMultivalueHistory{$H}")
+function Base.show{H}(io::IO, history::MVHistory{H})
+    print(io, "MVHistory{$H}")
     for (key, val) in history.storage
         print(io, "\n", "  :$(key) => $(val)")
     end
@@ -73,14 +73,14 @@ end
 using Base.Meta
 
 """
-Easily add to a DynMultivalueHistory object `tr`.
+Easily add to a MVHistory object `tr`.
 
 Example:
 
 ```julia
 using ValueHistories, OnlineStats
 v = Variance(BoundedEqualWeight(30))
-tr = DynMultivalueHistory()
+tr = MVHistory()
 for i=1:100
     r = rand()
     fit!(v,r)

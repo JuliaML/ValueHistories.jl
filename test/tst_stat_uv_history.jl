@@ -1,4 +1,4 @@
-for T in [VectorUnivalueHistory, QueueUnivalueHistory]
+for T in [History, QHistory]
     @testset "$(T.name.name): Basic functions" begin
         _history = T(Float64)
 

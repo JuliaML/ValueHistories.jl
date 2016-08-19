@@ -7,10 +7,10 @@ export
 
     ValueHistory,
       UnivalueHistory,
-        VectorUnivalueHistory,
-        QueueUnivalueHistory,
+        History,
+        QHistory,
       MultivalueHistory,
-        DynMultivalueHistory,
+        MVHistory,
     @trace
 
 include("abstract_history.jl")

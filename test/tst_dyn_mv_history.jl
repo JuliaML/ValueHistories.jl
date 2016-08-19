@@ -1,5 +1,5 @@
-@testset "DynMultivalueHistory: Basic functions" begin
-    _history = DynMultivalueHistory()
+@testset "MVHistory: Basic functions" begin
+    _history = MVHistory()
 
     function f(i, b; muh=10)
         @test b == "yo"
@@ -39,7 +39,7 @@
         @test i - 1 == v
     end
 
-    @test typeof(_history[:myf]) <: VectorUnivalueHistory
+    @test typeof(_history[:myf]) <: History
 
     a1, a2 = get(_history, :myf)
     @test typeof(a1) <: Vector && typeof(a2) <: Vector
@@ -51,15 +51,15 @@
     @test_throws KeyError length(_history, :sign)
 end
 
-@testset "DynMultivalueHistory: Storing arbitrary types" begin
-    _history = DynMultivalueHistory(QueueUnivalueHistory)
+@testset "MVHistory: Storing arbitrary types" begin
+    _history = MVHistory(QHistory)
 
     for i = 1:100
         @test push!(_history, :mystring, i % UInt8, string("i=", i + 1)) == string("i=", i+1)
         @test push!(_history, :myfloat, i % UInt8, Float32(i + 1)) == Float32(i+1)
     end
 
-    @test typeof(_history[:mystring]) <: QueueUnivalueHistory
+    @test typeof(_history[:mystring]) <: QHistory
 
     a1, a2 = get(_history, :mystring)
     @test typeof(a1) <: Vector{UInt8}
@@ -71,8 +71,8 @@ end
 end
 
 
-@testset "DynMultivalueHistory: @trace" begin
-    _history = DynMultivalueHistory()
+@testset "MVHistory: @trace" begin
+    _history = MVHistory()
     n = 2
     x = linspace(0,1,n)
     for i = 1:n
