@@ -22,7 +22,7 @@ end
 
 #-----------------------------------------------------------
 
-for T in [VectorUnivalueHistory, QueueUnivalueHistory]
+for T in [History, QHistory]
 
     msg("$(T.name.name): $n loops tracking accumulator as Float64")
 
@@ -49,7 +49,7 @@ end
 
 #-----------------------------------------------------------
 
-msg("DynMultivalueHistory: $n loops tracking accumulator as Float64 and String")
+msg("MVHistory: $n loops tracking accumulator as Float64 and String")
 
 function g(_history,n)
     tmp = 0.
@@ -61,13 +61,13 @@ function g(_history,n)
     tmp
 end
 
-_history = DynMultivalueHistory(VectorUnivalueHistory)
+_history = MVHistory(History)
 @time g(_history,n)
 
-_history = DynMultivalueHistory(VectorUnivalueHistory)
+_history = MVHistory(History)
 @time g(_history,n)
 
-msg("DynMultivalueHistory: Converting result into arrays")
+msg("MVHistory: Converting result into arrays")
 
 @time x,y = get(_history, :mystr)
 @time x,y = get(_history, :mystr)
