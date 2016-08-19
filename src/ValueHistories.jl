@@ -13,10 +13,10 @@ export
         MVHistory,
     @trace
 
-include("abstract_history.jl")
-include("queue_uv_history.jl")
-include("vector_uv_history.jl")
-include("dyn_mv_history.jl")
+include("abstract.jl")
+include("history.jl")
+include("qhistory.jl")
+include("mvhistory.jl")
 include("recipes.jl")
 
 Base.@deprecate_binding VectorUnivalueHistory History
