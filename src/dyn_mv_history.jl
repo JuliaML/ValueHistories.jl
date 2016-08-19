@@ -47,6 +47,8 @@ function Base.getindex(history::DynMultivalueHistory, key::Symbol)
     history.storage[key]
 end
 
+Base.haskey(history::DynMultivalueHistory, key::Symbol) = haskey(history.storage, key)
+
 function Base.get(history::DynMultivalueHistory, key::Symbol)
     l = length(history, key)
     k, v = first(history.storage[key])
@@ -66,4 +68,32 @@ function Base.show{H}(io::IO, history::DynMultivalueHistory{H})
     for (key, val) in history.storage
         print(io, "\n", "  :$(key) => $(val)")
     end
+end
+
+using Base.Meta
+
+"""
+Easily add to a DynMultivalueHistory object `tr`.
+
+Example:
+
+```julia
+using ValueHistories, OnlineStats
+v = Variance(BoundedEqualWeight(30))
+tr = DynMultivalueHistory()
+for i=1:100
+    r = rand()
+    fit!(v,r)
+    μ,σ = mean(v),std(v)
+
+    # add entries for :r, :μ, and :σ using their current values
+    @trace tr i r μ σ
+end
+"""
+macro trace(tr, i, vars...)
+    block = Expr(:block)
+    for v in vars
+        push!(block.args, :(push!($(esc(tr)), $(quot(Symbol(v))), $(esc(i)), $(esc(v)))))
+    end
+    block
 end

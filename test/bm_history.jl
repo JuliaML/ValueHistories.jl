@@ -73,4 +73,4 @@ msg("DynMultivalueHistory: Converting result into arrays")
 @time x,y = get(_history, :mystr)
 
 @assert length(y) == n
-@assert typeof(y) <: Vector{ASCIIString}
+@assert typeof(y) <: Vector{String}

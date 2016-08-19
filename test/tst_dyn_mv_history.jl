@@ -63,10 +63,34 @@ end
 
     a1, a2 = get(_history, :mystring)
     @test typeof(a1) <: Vector{UInt8}
-    @test typeof(a2) <: Vector{ASCIIString}
+    @test typeof(a2) <: Vector{String}
 
     a1, a2 = get(_history, :myfloat)
     @test typeof(a1) <: Vector{UInt8}
     @test typeof(a2) <: Vector{Float32}
 end
 
+
+@testset "DynMultivalueHistory: @trace" begin
+    _history = DynMultivalueHistory()
+    n = 2
+    x = linspace(0,1,n)
+    for i = 1:n
+        xi = x[i]
+        @test @trace(_history, i, xi, round(Int,xi)) == round(Int,xi)
+    end
+
+    @test haskey(_history, :xi)
+    a1, a2 = get(_history, :xi)
+    @test length(a1) == n
+    @test length(a2) == n
+    @test typeof(a1) <: Vector{Int}
+    @test typeof(a2) <: Vector{Float64}
+
+    @test haskey(_history, Symbol("round(Int,xi)"))
+    a1, a2 = get(_history, Symbol("round(Int,xi)"))
+    @test length(a1) == n
+    @test length(a2) == n
+    @test typeof(a1) <: Vector{Int}
+    @test typeof(a2) <: Vector{Int}
+end
