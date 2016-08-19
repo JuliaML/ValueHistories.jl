@@ -77,8 +77,7 @@ end
     x = linspace(0,1,n)
     for i = 1:n
         xi = x[i]
-        @test @trace(_history, i, xi) == xi
-        @test @trace(_history, i, round(Int,xi)) == round(Int,xi)
+        @test @trace(_history, i, xi, round(Int,xi)) == round(Int,xi)
     end
 
     @test haskey(_history, :xi)
