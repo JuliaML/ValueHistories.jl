@@ -1,5 +1,5 @@
 for T in [History, QHistory]
-    @testset "$(T.name.name): Basic functions" begin
+    @testset "$(T): Basic functions" begin
         _history = T(Float64)
 
         @test push!(_history, 1, 10.) == Float64(10.)
@@ -44,11 +44,11 @@ for T in [History, QHistory]
         @test convert(Vector{Float64}, a1 + 1) == a2
     end
 
-    @testset "$(T.name.name): No explicit iteration" begin
+    @testset "$(T): No explicit iteration" begin
         _history = T(Float64)
     end
 
-    @testset "$(T.name.name): Storing arbitrary types" begin
+    @testset "$(T): Storing arbitrary types" begin
         _history = T(String, UInt8)
 
         for i = 1:100

@@ -44,7 +44,7 @@ function Base.get{I,V}(history::QHistory{I,V})
     l = length(history)
     k, v = front(history.storage)
     karray = zeros(I, l)
-    varray = Array(V, l)
+    varray = Array{V}(l)
     i = 1
     for (k, v) in enumerate(history)
         karray[i] = k

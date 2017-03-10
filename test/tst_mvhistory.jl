@@ -87,8 +87,13 @@ end
     @test typeof(a1) <: Vector{Int}
     @test typeof(a2) <: Vector{Float64}
 
-    @test haskey(_history, Symbol("round(Int,xi)"))
-    a1, a2 = get(_history, Symbol("round(Int,xi)"))
+    a1, a2 = if VERSION < v"0.6-"
+        @test haskey(_history, Symbol("round(Int,xi)"))
+        get(_history, Symbol("round(Int,xi)"))
+    else
+        @test haskey(_history, Symbol("round(Int, xi)"))
+        get(_history, Symbol("round(Int, xi)"))
+    end
     @test length(a1) == n
     @test length(a2) == n
     @test typeof(a1) <: Vector{Int}

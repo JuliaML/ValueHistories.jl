@@ -17,7 +17,7 @@ end
     v_vec = [v for (k, v) in filtered]
     if length(v_vec) > 0
         markershape --> :ellipse
-        label       --> map(string, k_vec)'
+        label       --> reshape(map(string, k_vec), (1,length(k_vec)))
         if get(d, :layout, nothing) != nothing
             title  --> d[:label]
             legend --> false

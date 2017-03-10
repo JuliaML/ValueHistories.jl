@@ -24,7 +24,7 @@ end
 
 for T in [History, QHistory]
 
-    msg("$(T.name.name): $n loops tracking accumulator as Float64")
+    msg("$(T): $n loops tracking accumulator as Float64")
 
     function g(_history,n)
         tmp = 0.
@@ -41,7 +41,7 @@ for T in [History, QHistory]
     _history = T(Float64)
     @time g(_history,n)
 
-    msg("$(T.name.name): Converting result into arrays")
+    msg("$(T): Converting result into arrays")
 
     @time x,y = get(_history)
     @time x,y = get(_history)

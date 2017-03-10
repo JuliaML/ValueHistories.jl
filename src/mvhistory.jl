@@ -53,7 +53,7 @@ function Base.get(history::MVHistory, key::Symbol)
     l = length(history, key)
     k, v = first(history.storage[key])
     karray = zeros(typeof(k), l)
-    varray = Array(typeof(v), l)
+    varray = Array{typeof(v)}(l)
     i = 1
     for (k, v) in enumerate(history, key)
         karray[i] = k
