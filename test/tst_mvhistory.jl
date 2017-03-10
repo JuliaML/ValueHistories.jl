@@ -87,7 +87,7 @@ end
     @test typeof(a1) <: Vector{Int}
     @test typeof(a2) <: Vector{Float64}
 
-    a1, a2 = if VERSION < v"0.6-"
+    a1, a2 = if VERSION < v"0.6.0-dev.2505" # julia PR #20288
         @test haskey(_history, Symbol("round(Int,xi)"))
         get(_history, Symbol("round(Int,xi)"))
     else
