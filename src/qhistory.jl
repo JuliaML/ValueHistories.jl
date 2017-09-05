@@ -1,28 +1,23 @@
-type QHistory{I,V} <: UnivalueHistory{I}
+mutable struct QHistory{I,V} <: UnivalueHistory{I}
     lastiter::I
     storage::Deque{Tuple{I,V}}
 
-    function QHistory(::Type{V}, ::Type{I})
-        new(typemin(I), Deque{Tuple{I,V}}())
+    function QHistory(::Type{V}, ::Type{I} = Int) where {I,V}
+        new{I,V}(typemin(I), Deque{Tuple{I,V}}())
     end
 end
 
-function QHistory{I,V}(v::Type{V}, i::Type{I} = Int)
-    QHistory{I,V}(v, i)
-end
-
-# ==========================================================================
-#
+# ====================================================================
 
 Base.length(history::QHistory) = length(history.storage)
 Base.enumerate(history::QHistory) = history.storage
 Base.first(history::QHistory) = front(history.storage)
 Base.last(history::QHistory) = back(history.storage)
 
-function Base.push!{I,V}(
+function Base.push!(
         history::QHistory{I,V},
         iteration::I,
-        value::V)
+        value::V) where {I,V}
     lastiter = history.lastiter
     iteration > lastiter || throw(ArgumentError("Iterations must increase over time"))
     history.lastiter = iteration
@@ -30,9 +25,9 @@ function Base.push!{I,V}(
     value
 end
 
-function Base.push!{I,V}(
+function Base.push!(
         history::QHistory{I,V},
-        value::V)
+        value::V) where {I,V}
     lastiter = history.lastiter == typemin(I) ? zero(I) : history.lastiter
     iteration = lastiter + one(history.lastiter)
     history.lastiter = iteration
@@ -40,7 +35,7 @@ function Base.push!{I,V}(
     value
 end
 
-function Base.get{I,V}(history::QHistory{I,V})
+function Base.get(history::QHistory{I,V}) where {I,V}
     l = length(history)
     k, v = front(history.storage)
     karray = zeros(I, l)
@@ -54,9 +49,9 @@ function Base.get{I,V}(history::QHistory{I,V})
     karray, varray
 end
 
-Base.print{I,V}(io::IO, history::QHistory{I,V}) = print(io, "$(length(history)) elements {$I,$V}")
+Base.print(io::IO, history::QHistory{I,V}) where {I,V} = print(io, "$(length(history)) elements {$I,$V}")
 
-function Base.show{I,V}(io::IO, history::QHistory{I,V})
+function Base.show(io::IO, history::QHistory{I,V}) where {I,V}
     println(io, "QHistory")
     println(io, "    types: $I, $V")
     print(io,   "    length: $(length(history))")

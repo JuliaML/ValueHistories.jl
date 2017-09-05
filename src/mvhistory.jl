@@ -1,12 +1,12 @@
-immutable MVHistory{H<:UnivalueHistory} <: MultivalueHistory
+struct MVHistory{H<:UnivalueHistory} <: MultivalueHistory
     storage::Dict{Symbol, H}
 end
 
-function MVHistory{H<:UnivalueHistory}(::Type{H} = History)
+function MVHistory(::Type{H} = History) where {H<:UnivalueHistory}
     MVHistory{H}(Dict{Symbol, H}())
 end
 
-# ==========================================================================
+# ====================================================================
 # Functions
 
 Base.length(history::MVHistory, key::Symbol) = length(history.storage[key])
@@ -14,11 +14,11 @@ Base.enumerate(history::MVHistory, key::Symbol) = enumerate(history.storage[key]
 Base.first(history::MVHistory, key::Symbol) = first(history.storage[key])
 Base.last(history::MVHistory, key::Symbol) = last(history.storage[key])
 
-function Base.push!{I,H<:UnivalueHistory,V}(
+function Base.push!(
         history::MVHistory{H},
         key::Symbol,
         iteration::I,
-        value::V)
+        value::V) where {I,H<:UnivalueHistory,V}
     if !haskey(history.storage, key)
         _hist = H(V, I)
         push!(_hist, iteration, value)
@@ -29,10 +29,10 @@ function Base.push!{I,H<:UnivalueHistory,V}(
     value
 end
 
-function Base.push!{H<:UnivalueHistory,V}(
+function Base.push!(
         history::MVHistory{H},
         key::Symbol,
-        value::V)
+        value::V) where {H<:UnivalueHistory,V}
     if !haskey(history.storage, key)
         _hist = H(V, Int)
         push!(_hist, value)
@@ -63,7 +63,7 @@ function Base.get(history::MVHistory, key::Symbol)
     karray, varray
 end
 
-function Base.show{H}(io::IO, history::MVHistory{H})
+function Base.show(io::IO, history::MVHistory{H}) where {H}
     print(io, "MVHistory{$H}")
     for (key, val) in history.storage
         print(io, "\n", "  :$(key) => $(val)")

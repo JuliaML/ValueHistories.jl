@@ -1,6 +1,6 @@
-@compat abstract type ValueHistory end
-@compat abstract type UnivalueHistory{I} <: ValueHistory end
-@compat abstract type MultivalueHistory <: ValueHistory end
+abstract type ValueHistory end
+abstract type UnivalueHistory{I} <: ValueHistory end
+abstract type MultivalueHistory <: ValueHistory end
 
 Base.push!(history::UnivalueHistory, iteration, value) =
     throw(ArgumentError("The specified arguments are of incompatible type"))

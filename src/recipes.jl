@@ -1,6 +1,6 @@
 _is_plotable_history(::UnivalueHistory) = false
-_is_plotable_history{I,V<:Real}(::QHistory{I,V}) = true
-_is_plotable_history{I,V<:Real}(::History{I,V}) = true
+_is_plotable_history(::QHistory{I,V}) where {I,V<:Real} = true
+_is_plotable_history(::History{I,V}) where {I,V<:Real} = true
 
 _filter_plotable_histories(h::MVHistory) =
     filter((k,v) -> _is_plotable_history(v), h.storage)
@@ -31,7 +31,7 @@ end
     end
 end
 
-@recipe function plot{T<:ValueHistories.UnivalueHistory}(hs::AbstractVector{T})
+@recipe function plot(hs::AbstractVector{T}) where {T<:ValueHistories.UnivalueHistory}
     for h in hs
         @series begin
             h
