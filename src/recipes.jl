@@ -18,8 +18,8 @@ end
     if length(v_vec) > 0
         markershape --> :ellipse
         label       --> reshape(map(string, k_vec), (1,length(k_vec)))
-        if get(d, :layout, nothing) != nothing
-            title  --> d[:label]
+        if get(plotattributes, :layout, nothing) != nothing
+            title  --> plotattributes[:label]
             legend --> false
         else
             title  --> "Multivalue History"
