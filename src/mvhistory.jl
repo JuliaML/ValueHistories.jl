@@ -97,3 +97,16 @@ macro trace(tr, i, vars...)
     end
     block
 end
+
+"""
+    pushoradd!(trace, key, iter, val)
+
+Increments the value for a given key and iteration if it exists, otherwise adds the key/iteration pair with an ordinary push.
+"""
+function pushoradd!(trace::MultivalueHistory, key::Symbol, iter::Number, val)
+    if haskey(trace, key) && length(trace.storage[key]) >= iter
+        trace[key].values[iter] += val
+    else
+        push!(trace, key, iter, val)
+    end
+end
