@@ -1,3 +1,5 @@
+export pushoradd!
+
 struct MVHistory{H<:UnivalueHistory} <: MultivalueHistory
     storage::Dict{Symbol, H}
 end
