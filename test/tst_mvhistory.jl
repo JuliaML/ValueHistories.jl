@@ -99,3 +99,15 @@ end
     @test typeof(a1) <: Vector{Int}
     @test typeof(a2) <: Vector{Int}
 end
+
+@testset "Increment!" begin
+    _history = MVHistory()
+    key = :test
+    val = 1
+    @test increment!(_history, key, 1, val) == val
+    @test increment!(_history, key, 1, val) == 2val
+    @test increment!(_history, key, 2, 4val) == 4val
+    @test increment!(_history, key, 10, 5val) == 5val
+    _history2 = MVHistory(QHistory)
+    @test_throws MethodError increment!(_history2, key, 1, val) == val
+end

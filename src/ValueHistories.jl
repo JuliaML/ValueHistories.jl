@@ -12,6 +12,7 @@ export
         QHistory,
       MultivalueHistory,
         MVHistory,
+        increment!,
     @trace
 
 include("abstract.jl")
