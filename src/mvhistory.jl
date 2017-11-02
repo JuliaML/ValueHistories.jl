@@ -1,4 +1,3 @@
-export pushoradd!
 
 struct MVHistory{H<:UnivalueHistory} <: MultivalueHistory
     storage::Dict{Symbol, H}
@@ -91,6 +90,7 @@ for i=1:100
     # add entries for :r, :μ, and :σ using their current values
     @trace tr i r μ σ
 end
+```
 """
 macro trace(tr, i, vars...)
     block = Expr(:block)
@@ -101,14 +101,16 @@ macro trace(tr, i, vars...)
 end
 
 """
-    pushoradd!(trace, key, iter, val)
+    increment!(trace, key, iter, val)
 
 Increments the value for a given key and iteration if it exists, otherwise adds the key/iteration pair with an ordinary push.
 """
-function pushoradd!(trace::MultivalueHistory, key::Symbol, iter::Number, val)
-    if haskey(trace, key) && length(trace.storage[key]) >= iter
-        trace[key].values[iter] += val
-    else
-        push!(trace, key, iter, val)
+function increment!(trace::MVHistory{<:History}, key::Symbol, iter::Number, val) 
+    if haskey(trace, key)
+        i = findfirst(trace.storage[key].iterations, iter)
+        if i != 0
+            return trace[key].values[i] += val
+        end
     end
+    push!(trace, key, iter, val)
 end
