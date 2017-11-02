@@ -108,6 +108,7 @@ Supported operations for multivalue histories:
 - `first(history, key)`: First stored observation (as tuple)
 - `last(history, key)`: Last stored observation (as tuple)
 - `length(history, key)`: Number of stored observations
+- `increment!(history, key, iteration, value)`: Similar to `push!` but increments the `value` if the `key` and `iteration` combination already exists.
 
 Here is a little example code showing the basic usage:
 
@@ -171,4 +172,3 @@ plot(history)
 ## License
 
 This code is free to use under the terms of the MIT license.
-
