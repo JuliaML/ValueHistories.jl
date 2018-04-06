@@ -62,3 +62,15 @@ for T in [History, QHistory]
         @test typeof(a2) <: Vector{String}
     end
 end
+
+
+@testset "History: increment!" begin
+    _history = History(Float64)
+    val = 1.
+    @test increment!(_history, 1, val) == val
+    @test increment!(_history, 1, val) == 2val
+    @test increment!(_history, 2, 4val) == 4val
+    @test increment!(_history, 10, 5val) == 5val
+    _history2 = QHistory(Float64)
+    @test_throws MethodError increment!(_history2, 1, val) == val
+end

@@ -44,3 +44,16 @@ function Base.show(io::IO, history::History{I,V}) where {I,V}
     println(io, "  * types: $I, $V")
     print(io,   "  * length: $(length(history))")
 end
+
+"""
+    increment!(trace, iter, val)
+
+Increments the value for a given iteration if it exists, otherwise adds the iteration with an ordinary push.
+"""
+function increment!(trace::History{I,V}, iter::Number, val)  where {I,V}
+    if !isempty(trace.iterations) && (trace.lastiter == iter || iter ∈ trace.iterations) # First check is most common case and makes it faster
+        trace.values[trace.iterations[iter]] += val
+    else
+        push!(trace, iter, val)
+    end
+end
