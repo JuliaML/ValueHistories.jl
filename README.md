@@ -46,6 +46,7 @@ Supported operations for univalue histories:
 - `first(history)`: First stored observation (as tuple)
 - `last(history)`: Last stored observation (as tuple)
 - `length(history)`: Number of stored observations
+- `increment!(history, iteration, value)`: Similar to `push!` but increments the `value` if the `iteration` already exists. Only supported by `History`.
 
 Here is a little example code showing the basic usage:
 
