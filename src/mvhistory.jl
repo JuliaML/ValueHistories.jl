@@ -14,6 +14,8 @@ Base.length(history::MVHistory, key::Symbol) = length(history.storage[key])
 Base.enumerate(history::MVHistory, key::Symbol) = enumerate(history.storage[key])
 Base.first(history::MVHistory, key::Symbol) = first(history.storage[key])
 Base.last(history::MVHistory, key::Symbol) = last(history.storage[key])
+Base.keys(history::MVHistory) = keys(history.storage)
+Base.values(history::MVHistory, key::Symbol) = get(history, key)[2]
 
 function Base.push!(
         history::MVHistory{H},

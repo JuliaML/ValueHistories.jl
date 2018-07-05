@@ -21,6 +21,11 @@
 
     @test_throws ArgumentError push!(_history, :myf, 200, "test")
 
+    for k in keys(_history)
+        @test k in [:myf, :myint, :myint2]
+    end
+    @test values(_history, :myf) == numbers + 1
+    @test_throws KeyError values(_history, :abc)
     @test first(_history, :myf) == (-10, -9)
     @test last(_history, :myf) == (100, 101)
     @test first(_history, :myint) == (0, -1)
