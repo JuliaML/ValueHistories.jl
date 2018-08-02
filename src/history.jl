@@ -51,9 +51,15 @@ end
 Increments the value for a given iteration if it exists, otherwise adds the iteration with an ordinary push.
 """
 function increment!(trace::History{I,V}, iter::Number, val)  where {I,V}
-    if !isempty(trace.iterations) && (trace.lastiter == iter || iter ∈ trace.iterations) # First check is most common case and makes it faster
-        trace.values[trace.iterations[iter]] += val
-    else
-        push!(trace, iter, val)
+    if !isempty(trace.iterations)
+        if trace.lastiter == iter # Check most common case to make it faster
+            i = length(trace.iterations)
+        else
+            i = findfirst(trace.iterations, iter)
+        end
+        if i >= 1
+            return (trace.values[i] += val)
+        end
     end
+    push!(trace, iter, val)
 end
