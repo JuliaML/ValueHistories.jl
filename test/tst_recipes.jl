@@ -5,7 +5,7 @@ using VisualRegressionTests
 
 # run a visual regression test comparing the output to the saved reference png
 function dotest(testname, func)
-    srand(1)
+    Random.seed!(1)
     reffn = joinpath(refdir, "$testname.png")
     vtest = VisualTest(func, reffn)
     result = test_images(vtest)
