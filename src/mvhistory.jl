@@ -54,7 +54,7 @@ function Base.get(history::MVHistory, key::Symbol)
     l = length(history, key)
     k, v = first(history.storage[key])
     karray = zeros(typeof(k), l)
-    varray = Array{typeof(v)}(l)
+    varray = Array{typeof(v)}(undef, l)
     i = 1
     for (k, v) in enumerate(history, key)
         karray[i] = k
@@ -105,10 +105,10 @@ end
 
 Increments the value for a given key and iteration if it exists, otherwise adds the key/iteration pair with an ordinary push.
 """
-function increment!(trace::MVHistory{<:History}, key::Symbol, iter::Number, val) 
+function increment!(trace::MVHistory{<:History}, key::Symbol, iter::Number, val)
     if haskey(trace, key)
-        i = findfirst(trace.storage[key].iterations, iter)
-        if i != 0
+        i = findfirst(isequal(iter), trace.storage[key].iterations)
+        if i != nothing
             return trace[key].values[i] += val
         end
     end

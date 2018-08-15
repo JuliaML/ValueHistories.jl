@@ -4,7 +4,7 @@ mutable struct History{I,V} <: UnivalueHistory{I}
     values::Vector{V}
 
     function History(::Type{V}, ::Type{I} = Int) where {I,V}
-        new{I,V}(typemin(I), Array{I}(0), Array{V}(0))
+        new{I,V}(typemin(I), Array{I}(undef, 0), Array{V}(undef, 0))
     end
 end
 
@@ -55,9 +55,9 @@ function increment!(trace::History{I,V}, iter::Number, val)  where {I,V}
         if trace.lastiter == iter # Check most common case to make it faster
             i = length(trace.iterations)
         else
-            i = findfirst(trace.iterations, iter)
+            i = findfirst(isequal(iter), trace.iterations)
         end
-        if i >= 1
+        if i != nothing
             return (trace.values[i] += val)
         end
     end

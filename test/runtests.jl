@@ -1,5 +1,5 @@
 using ValueHistories
-using Base.Test
+using Test
 
 tests = [
     "tst_history.jl"
