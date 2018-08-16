@@ -13,8 +13,7 @@ arbitrarily spaced sampling times*
 This package is registered in `METADATA.jl` and can be installed as usual
 
 ```julia
-Pkg.add("ValueHistories")
-using ValueHistories
+pkg> add ValueHistories
 ```
 
 ## Overview

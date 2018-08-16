@@ -44,7 +44,7 @@
     a1, a2 = get(_history, :myf)
     @test typeof(a1) <: Vector && typeof(a2) <: Vector
     @test length(a1) == length(a2) == length(numbers) == length(_history, :myf)
-    @test a1 + 1 == a2
+    @test a1 .+ 1 == a2
 
     @test_throws ArgumentError push!(_history, :myf, 10, f(10, "yo", muh = .3))
     @test_throws KeyError enumerate(_history, :sign)
@@ -74,7 +74,7 @@ end
 @testset "MVHistory: @trace" begin
     _history = MVHistory()
     n = 2
-    x = linspace(0,1,n)
+    x = [0.0, 1.0]
     for i = 1:n
         xi = x[i]
         @test @trace(_history, i, xi, round(Int,xi)) == round(Int,xi)

@@ -41,7 +41,7 @@ for T in [History, QHistory]
         a1, a2 = get(_history)
         @test typeof(a1) <: Vector{Int} && typeof(a2) <: Vector{Float64}
         @test length(a1) == length(a2) == length(numbers) == length(_history)
-        @test convert(Vector{Float64}, a1 + 1) == a2
+        @test convert(Vector{Float64}, a1 .+ 1) == a2
     end
 
     @testset "$(T): No explicit iteration" begin
