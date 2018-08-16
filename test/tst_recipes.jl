@@ -1,5 +1,6 @@
 # THIS FILE IS DEACTIVATED
 
+using Random
 using Plots
 using VisualRegressionTests
 

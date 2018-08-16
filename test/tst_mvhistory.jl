@@ -87,8 +87,8 @@ end
     @test typeof(a1) <: Vector{Int}
     @test typeof(a2) <: Vector{Float64}
 
-    a1, a2 = @test haskey(_history, Symbol("round(Int, xi)"))
-             get(_history, Symbol("round(Int, xi)"))
+    @test haskey(_history, Symbol("round(Int, xi)"))
+    a1, a2 = get(_history, Symbol("round(Int, xi)"))
     @test length(a1) == n
     @test length(a2) == n
     @test typeof(a1) <: Vector{Int}

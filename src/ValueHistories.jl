@@ -2,7 +2,6 @@ module ValueHistories
 
 using DataStructures
 using RecipesBase
-using Compat
 
 export
 
