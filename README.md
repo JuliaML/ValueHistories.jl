@@ -113,6 +113,7 @@ Supported operations for multivalue histories:
 Here is a little example code showing the basic usage:
 
 ```julia
+using ValueHistories, Primes
 history = MVHistory()
 
 for i=1:100
