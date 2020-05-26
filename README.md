@@ -4,7 +4,7 @@
 training curves or other information of arbitrary types and at
 arbitrarily spaced sampling times*
 
-| **Package Status** | **PkgEval (Nanosoldier)** | **Build Status**  |
+| **Package License** | **PkgEval (Nanosoldier)** | **Build Status**  |
 |:------------------:|:---------------------:|:-----------------:|
 | [![License](http://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat)](LICENSE.md) | [![PkgEval][pkgeval-img]][pkgeval-url] | [![Build Status](https://travis-ci.org/JuliaML/ValueHistories.jl.svg?branch=master)](https://travis-ci.org/JuliaML/ValueHistories.jl) [![Build status](https://ci.appveyor.com/api/projects/status/8v1n9hqfnn5jslyn/branch/master?svg=true)](https://ci.appveyor.com/project/Evizero/valuehistories-jl/branch/master) [![Coverage Status](https://coveralls.io/repos/github/JuliaML/ValueHistories.jl/badge.svg?branch=master)](https://coveralls.io/github/JuliaML/ValueHistories.jl?branch=master) |
 
