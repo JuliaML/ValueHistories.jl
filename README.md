@@ -4,9 +4,12 @@
 training curves or other information of arbitrary types and at
 arbitrarily spaced sampling times*
 
-| **Package Status** | **Package Evaluator** | **Build Status**  |
+| **Package License** | **PkgEval (Nanosoldier)** | **Build Status**  |
 |:------------------:|:---------------------:|:-----------------:|
-| [![License](http://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat)](LICENSE.md) | [![ValueHistories](http://pkg.julialang.org/badges/ValueHistories_0.6.svg)](http://pkg.julialang.org/?pkg=ValueHistories) [![ValueHistories](http://pkg.julialang.org/badges/ValueHistories_0.7.svg)](http://pkg.julialang.org/?pkg=ValueHistories) | [![Build Status](https://travis-ci.org/JuliaML/ValueHistories.jl.svg?branch=master)](https://travis-ci.org/JuliaML/ValueHistories.jl) [![Build status](https://ci.appveyor.com/api/projects/status/8v1n9hqfnn5jslyn/branch/master?svg=true)](https://ci.appveyor.com/project/Evizero/valuehistories-jl/branch/master) [![Coverage Status](https://coveralls.io/repos/github/JuliaML/ValueHistories.jl/badge.svg?branch=master)](https://coveralls.io/github/JuliaML/ValueHistories.jl?branch=master) |
+| [![License](http://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat)](LICENSE.md) | [![PkgEval][pkgeval-img]][pkgeval-url] | [![Build Status](https://travis-ci.org/JuliaML/ValueHistories.jl.svg?branch=master)](https://travis-ci.org/JuliaML/ValueHistories.jl) [![Build status](https://ci.appveyor.com/api/projects/status/8v1n9hqfnn5jslyn/branch/master?svg=true)](https://ci.appveyor.com/project/Evizero/valuehistories-jl/branch/master) [![Coverage Status](https://coveralls.io/repos/github/JuliaML/ValueHistories.jl/badge.svg?branch=master)](https://coveralls.io/github/JuliaML/ValueHistories.jl?branch=master) |
+
+[pkgeval-img]: https://juliaci.github.io/NanosoldierReports/pkgeval_badges/V/ValueHistories.svg
+[pkgeval-url]: https://juliaci.github.io/NanosoldierReports/pkgeval_badges/V/ValueHistories.html
 
 ## Installation
 
