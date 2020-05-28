@@ -1,9 +1,11 @@
 using ValueHistories
 using Test
+using DataFrames
 
 tests = [
     "tst_history.jl"
     "tst_mvhistory.jl"
+    "tst_dataframe.jl"
 ]
 
 perf = [

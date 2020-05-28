@@ -1,3 +1,5 @@
+using .DataFrames
+
 function Base.convert(::Type{DataFrame}, h::MVHistory)
     names = collect(keys(h))
     dfs = map(names) do key
@@ -8,5 +10,5 @@ function Base.convert(::Type{DataFrame}, h::MVHistory)
 end
 
 function Base.convert(::Type{DataFrame}, h::History)
-    DataFrame(get(h), [:iter, :val])
+    DataFrame(collect(get(h)), [:iter, :val])
 end
