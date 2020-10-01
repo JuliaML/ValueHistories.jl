@@ -3,7 +3,7 @@ _is_plotable_history(::QHistory{I,V}) where {I,V<:Real} = true
 _is_plotable_history(::History{I,V}) where {I,V<:Real} = true
 
 _filter_plotable_histories(h::MVHistory) =
-    filter((k,v) -> _is_plotable_history(v), h.storage)
+    filter(p -> _is_plotable_history(p.second), h.storage)
 
 @recipe function plot(h::Union{History,QHistory})
     markershape --> :ellipse
