@@ -11,8 +11,8 @@ end
 
 Base.length(history::QHistory) = length(history.storage)
 Base.enumerate(history::QHistory) = history.storage
-Base.first(history::QHistory) = front(history.storage)
-Base.last(history::QHistory) = back(history.storage)
+Base.first(history::QHistory) = first(history.storage)
+Base.last(history::QHistory) = last(history.storage)
 
 function Base.push!(
         history::QHistory{I,V},
@@ -37,7 +37,7 @@ end
 
 function Base.get(history::QHistory{I,V}) where {I,V}
     l = length(history)
-    k, v = front(history.storage)
+    k, v = first(history.storage)
     karray = Array{I}(undef, l)
     varray = Array{V}(undef, l)
     i = 1
