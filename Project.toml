@@ -1,7 +1,7 @@
 name = "ValueHistories"
 uuid = "98cad3c8-aec3-5f06-8e41-884608649ab7"
 authors = ["JuliaML and contributors"]
-version = "0.5.5"
+version = "0.5.6"
 
 [deps]
 DataStructures = "864edb3b-99cc-5e75-8d2d-829cb0a9cfe8"
